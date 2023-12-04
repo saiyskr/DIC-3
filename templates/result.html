@@ -1,0 +1,48 @@
+<!-- templates/result.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Result</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        .vintage-label {
+            text-align: center;
+            font-size: 36px;
+            font-weight: bold;
+            padding: 10px;
+            margin-top: 20px;
+            border: 5px solid;
+            border-image: linear-gradient(45deg, #ff7e5f, #feb47b);
+            border-image-slice: 1;
+            display: inline-block;
+        }
+
+        .good-label {
+            color: #4CAF50; /* Green color for "Good" */
+        }
+
+        .bad-label {
+            color: #FF5733; /* Red color for "Bad" */
+        }
+    </style>
+</head>
+<body>
+    <h1>Result</h1>
+    <p>Prediction: {{ prediction }}</p>
+
+    <div class="vintage-label {{ prediction_category }}">
+        <p>{{ prediction_category }}</p>
+    </div>
+</body>
+</html>

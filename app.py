@@ -18,13 +18,20 @@ CORS(app)
 
 with open('models\wine_quality_model.pkl', 'rb') as file:
     model, min_values, max_values = pickle.load(file)
-    print(min_values)
+    # list_representation = min_values.tolist()
+    min_values = dict(min_values.round(2))
+    max_values = dict(max_values.round(2))
     print(max_values)
+    # dict_representation = {key: value for key, value in enumerate(min_values)}
 
+    # print(min_values.tolist())
+    # print(dict_representation)
+    
+print(min_values["fixed acidity"])
 # Define a route for the home page
 @app.route('/')
 def home():
-    return render_template('index.html')
+    return render_template('index.html',min_values = min_values,max_values= max_values)
 
 @app.route('/predict', methods=['POST'])
 def predict():

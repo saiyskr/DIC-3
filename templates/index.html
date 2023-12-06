@@ -50,8 +50,8 @@
         </select><br>
 
         <div class="slidecontainer">
-            <p>Fixed Acidity: <span id="fixed_acidity_value">7</span></p>
-            <input type="range" min="0" max="15" value="7" class="slider" id="fixed_acidity" name="fixed_acidity" oninput="updateSliderValue('fixed_acidity', 'fixed_acidity_value')">
+            <p>Fixed Acidity: <span id="fixed_acidity_value">5.4</span></p>
+            <input type="range" min="{{min_values['fixed acidity']}}" max="{{max_values['fixed acidity']}}" step="0.1"  value="5.4" class="slider" id="fixed_acidity" name="fixed_acidity" oninput="updateSliderValue('fixed_acidity', 'fixed_acidity_value')">
         </div>
 
         <div class="slidecontainer">

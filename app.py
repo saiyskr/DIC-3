@@ -21,15 +21,9 @@ with open('models\wine_quality_model.pkl', 'rb') as file:
     # list_representation = min_values.tolist()
     min_values = dict(min_values.round(2))
     max_values = dict(max_values.round(2))
-    print(min_values)
-    print(max_values)
-    # dict_representation = {key: value for key, value in enumerate(min_values)}
+    # print(min_values)
+    # print(max_values)
 
-    # print(min_values.tolist())
-    # print(dict_representation)
-    
-# print(min_values["fixed acidity"])
-# Define a route for the home page
 @app.route('/')
 def home():
     return render_template('index.html',min_values = min_values,max_values= max_values)
@@ -63,19 +57,21 @@ def predict():
         # print(key)
         normalized_features.append((x - min_values[key]) / (max_values[key] - min_values[key]))
 
-    print("Original Features:")
-    print(features)
+    # print("Original Features:")
+    # print(features)
 
-    print("\nScaled Features:")
-    print(normalized_features)
+    # print("\nNormalized Features:")
+    # print(normalized_features)
     
     # model:any
-    prediction = model.predict([features])[0]
+    prediction = model.predict([normalized_features])[0]
+    
     prediction_percent = int(prediction * 100)
     if prediction == 1:
         prediction_category = "Good"
     else:
         prediction_category = "Bad"
+    
     return render_template('result.html', prediction=prediction, prediction_percent=prediction_percent,prediction_category=prediction_category)
 # @app.route('/')
 # def hello():

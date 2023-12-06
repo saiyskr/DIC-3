@@ -18,9 +18,8 @@ CORS(app)
 
 with open('models\wine_quality_model.pkl', 'rb') as file:
     model, min_values, max_values = pickle.load(file)
-    # list_representation = min_values.tolist()
-    min_values = dict(min_values.round(1))
-    max_values = dict(max_values.round(1))
+    min_values = dict(min_values)
+    max_values = dict(max_values)
     print(min_values)
     print(max_values)
 
@@ -42,26 +41,25 @@ def predict():
                 float(request.form['residual_sugar']),
                 float(request.form['chlorides']),
                 float(request.form['free_sulfur_dioxide']),
-                # float(request.form['total_sulfur_dioxide']),
+                float(request.form['total_sulfur_dioxide']),
                 float(request.form['density']),
-                # float(request.form['pH']),
+                float(request.form['pH']),
                 float(request.form['sulphates']),
                 float(request.form['alcohol'])]
     
     # print(features)
     normalized_features =[]
     normalized_features.append(wine_type_encoded)
-    
     for key, x in zip(min_values.keys(), features[1:]):
         key = key.replace("_"," ")
-        denominator = max_values[key] - min_values[key]
-        print(key)
-        if(denominator!=0):
-            normalized_features.append((x - min_values[key]) / denominator)
+        if(key == 'pH' or key == 'total sulfur dioxide'):
+            pass
         else:
-            normalized_features.append(0)
+            denominator = max_values[key] - min_values[key]
+            print(key)
+            print(x)
+            normalized_features.append((x - min_values[key]) / denominator)
             
-
     print("Original Features:")
     print(features)
 

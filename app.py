@@ -17,7 +17,9 @@ app = Flask(__name__, static_folder="/static")
 CORS(app)
 
 with open('models\wine_quality_model.pkl', 'rb') as file:
-    model = pickle.load(file)
+    model, min_values, max_values = pickle.load(file)
+    print(min_values)
+    print(max_values)
 
 # Define a route for the home page
 @app.route('/')

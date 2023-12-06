@@ -19,10 +19,10 @@ CORS(app)
 with open('models\wine_quality_model.pkl', 'rb') as file:
     model, min_values, max_values = pickle.load(file)
     # list_representation = min_values.tolist()
-    min_values = dict(min_values.round(2))
-    max_values = dict(max_values.round(2))
-    # print(min_values)
-    # print(max_values)
+    min_values = dict(min_values.round(1))
+    max_values = dict(max_values.round(1))
+    print(min_values)
+    print(max_values)
 
 @app.route('/')
 def home():
@@ -54,14 +54,19 @@ def predict():
     
     for key, x in zip(min_values.keys(), features[1:]):
         key = key.replace("_"," ")
-        # print(key)
-        normalized_features.append((x - min_values[key]) / (max_values[key] - min_values[key]))
+        denominator = max_values[key] - min_values[key]
+        print(key)
+        if(denominator!=0):
+            normalized_features.append((x - min_values[key]) / denominator)
+        else:
+            normalized_features.append(0)
+            
 
-    # print("Original Features:")
-    # print(features)
+    print("Original Features:")
+    print(features)
 
-    # print("\nNormalized Features:")
-    # print(normalized_features)
+    print("\nNormalized Features:")
+    print(normalized_features)
     
     # model:any
     prediction = model.predict([normalized_features])[0]

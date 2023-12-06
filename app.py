@@ -21,13 +21,14 @@ with open('models\wine_quality_model.pkl', 'rb') as file:
     # list_representation = min_values.tolist()
     min_values = dict(min_values.round(2))
     max_values = dict(max_values.round(2))
+    print(min_values)
     print(max_values)
     # dict_representation = {key: value for key, value in enumerate(min_values)}
 
     # print(min_values.tolist())
     # print(dict_representation)
     
-print(min_values["fixed acidity"])
+# print(min_values["fixed acidity"])
 # Define a route for the home page
 @app.route('/')
 def home():
@@ -53,7 +54,21 @@ def predict():
                 float(request.form['sulphates']),
                 float(request.form['alcohol'])]
     
+    # print(features)
+    normalized_features =[]
+    normalized_features.append(wine_type_encoded)
+    
+    for key, x in zip(min_values.keys(), features[1:]):
+        key = key.replace("_"," ")
+        # print(key)
+        normalized_features.append((x - min_values[key]) / (max_values[key] - min_values[key]))
+
+    print("Original Features:")
     print(features)
+
+    print("\nScaled Features:")
+    print(normalized_features)
+    
     # model:any
     prediction = model.predict([features])[0]
     prediction_percent = int(prediction * 100)

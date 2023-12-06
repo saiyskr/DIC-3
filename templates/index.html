@@ -2,14 +2,25 @@
 <html>
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <style>
+      body{
+        text-align:center;
+      }
+      h1{
+        font-family: Arial;
+        margin-top:20px;
+      }
       .slidecontainer {
         width: 100%;
+        margin-top:20px;
       }
-
+      .winetype{
+        margin-top: 40px;
+      }
       .slider {
         -webkit-appearance: none;
-        width: 30%;
+        width: 100%;
         height: 10px;
         background: green;
         outline: none;
@@ -37,19 +48,25 @@
         background: #04aa6d;
         cursor: pointer;
       }
+      .predictbtn{
+        margin:40px;
+      }
     </style>
+    
   </head>
   <body>
-    <h3>Wine Quality Predictor</h3>
+    <h1>Wine Quality Predictor</h1>
     <form action="/predict" method="post">
-      <div class="slidecontainer">
+      <div class="container-fluid">
+      <div class="row">
+      <div class="slidecontainer winetype col-md-4">
         <label for="wine_type">Wine Type:</label>
         <select name="wine_type" required>
           <option value="red">Red</option>
           <option value="white">White</option></select
         ><br />
-
-        <div class="slidecontainer">
+      </div>
+        <div class="slidecontainer col-md-4">
           <p>Fixed Acidity: <span id="fixed_acidity_value">5.4</span></p>
           <input
             type="range"
@@ -64,7 +81,7 @@
           />
         </div>
 
-        <div class="slidecontainer">
+        <div class="slidecontainer col-md-4">
           <p>Volatile Acidity: <span id="volatile_acidity_value">0.5</span></p>
           <input
             type="range"
@@ -78,8 +95,9 @@
             oninput="updateSliderValue('volatile_acidity', 'volatile_acidity_value')"
           />
         </div>
-
-        <div class="slidecontainer">
+      </div>
+      <div class="row">
+        <div class="slidecontainer col-md-4">
           <p>Citric Acid: <span id="citric_acid_value">0.3</span></p>
           <input
             type="range"
@@ -94,7 +112,7 @@
           />
         </div>
 
-        <div class="slidecontainer">
+        <div class="slidecontainer col-md-4">
           <p>Residual Sugar: <span id="residual_sugar_value">10</span></p>
           <input
             type="range"
@@ -108,7 +126,7 @@
           />
         </div>
 
-        <div class="slidecontainer">
+        <div class="slidecontainer col-md-4">
           <p>Chlorides: <span id="chlorides_value">0.08</span></p>
           <input
             type="range"
@@ -122,8 +140,9 @@
             oninput="updateSliderValue('chlorides', 'chlorides_value')"
           />
         </div>
-
-        <div class="slidecontainer">
+      </div>
+      <div class="row">
+        <div class="slidecontainer col-md-4">
           <p>
             Free Sulfur Dioxide: <span id="free_sulfur_dioxide_value">30</span>
           </p>
@@ -139,7 +158,7 @@
           />
         </div>
 
-        <div class="slidecontainer">
+        <div class="slidecontainer col-md-4">
           <p>pH: <span id="pH_value">2.9</span></p>
           <input
             type="range"
@@ -154,7 +173,7 @@
           />
         </div>
 
-        <div class="slidecontainer">
+        <div class="slidecontainer col-md-4">
           <p>
             Total Sulfur dioxide:
             <span id="total_sulfur_dioxide_value">70</span>
@@ -171,8 +190,9 @@
             oninput="updateSliderValue('total_sulfur_dioxide', 'total_sulfur_dioxide_value')"
           />
         </div>
-
-        <div class="slidecontainer">
+      </div>
+      <div class="row">
+        <div class="slidecontainer col-md-4">
           <p>Density: <span id="density_value">0.995</span></p>
           <input
             type="range"
@@ -187,7 +207,7 @@
           />
         </div>
 
-        <div class="slidecontainer">
+        <div class="slidecontainer col-md-4">
           <p>Sulphates: <span id="sulphates_value">0.6</span></p>
           <input
             type="range"
@@ -202,7 +222,7 @@
           />
         </div>
 
-        <div class="slidecontainer">
+        <div class="slidecontainer col-md-4">
           <p>Alcohol: <span id="alcohol_value">11</span></p>
           <input
             type="range"
@@ -216,8 +236,9 @@
             oninput="updateSliderValue('alcohol', 'alcohol_value')"
           />
         </div>
-
-        <button type="submit">Predict</button>
+      </div>
+     
+      <button class="btn btn-primary btn-lg predictbtn" type="submit">Predict</button>
       </div>
 
       <script>

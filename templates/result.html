@@ -14,7 +14,7 @@
 
       h1 {
         text-align: center;
-        color: #333;
+        color: purple;
       }
 
       .vintage-label {
@@ -48,7 +48,7 @@
     <!--<p>Prediction: {{ prediction }}</p>-->
 
     <div class="vintage-label {{ prediction_category }}">
-      <p>{{ prediction_category }}</p>
+      <p>{{ prediction_category }} Wine Quality</p>
       <img src="{% if prediction_category == 'Good' %}static/images/thumbsup.jpg{% else %}static/images/thumbsdown.jpg{% endif %}" alt="Result Image">
     </div>
     

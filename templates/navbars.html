@@ -351,7 +351,11 @@
       document.querySelector('.visualizations-container').classList.add('hidden');
       document.querySelector('.home').classList.add('hidden');
     }
-
+    function updateSliderValue(sliderId, displayId) {
+        var slider = document.getElementById(sliderId);
+        var display = document.getElementById(displayId);
+        display.innerHTML = slider.value;
+      }
     function showVisualizations() {
       document.querySelector('.predict-container').classList.add('hidden');
       document.querySelector('.home').classList.add('hidden');

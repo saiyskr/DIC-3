@@ -25,7 +25,7 @@ with open('models\wine_quality_model.pkl', 'rb') as file:
 
 @app.route('/')
 def home():
-    return render_template('index.html',min_values = min_values,max_values= max_values)
+    return render_template('navbars.html',min_values = min_values,max_values= max_values)
 
 @app.route('/predict', methods=['POST'])
 def predict():

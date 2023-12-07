@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  
+  <style>
+    body {
+      text-align: center;
+    }
+
+    h1 {
+      ffont-family: Arial, sans-serif;
+      margin-top: 20px;
+    }
+    h3 {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+      }
+    .slidecontainer {
+      width: 100%;
+      margin-top: 20px;
+    }
+
+    .winetype {
+      margin-top: 40px;
+    }
+
+    .slider {
+      -webkit-appearance: none;
+      width: 100%;
+      height: 10px;
+      background: green;
+      outline: none;
+      opacity: 0.7;
+      -webkit-transition: 0.2s;
+      transition: opacity 0.2s;
+    }
+
+    .slider:hover {
+      opacity: 1;
+    }
+
+    .slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 10px;
+      height: 20px;
+      background: #04aa6d;
+      cursor: pointer;
+    }
+
+    .slider::-moz-range-thumb {
+      width: 10px;
+      height: 20px;
+      background: #04aa6d;
+      cursor: pointer;
+    }
+
+    .predictbtn {
+      margin: 40px;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .plot-img{
+       margin:40px;
+       width:35%;
+       height:40%;
+    }
+    .home{
+        font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+    }
+    .home h1 {
+        color: purple;
+    }
+
+    .home p {
+        color: #495057;
+        font-size: 18px;
+        line-height: 1.6;
+        margin-bottom: 20px;
+    }
+
+    .home a {
+        color: #007bff;
+        text-decoration: none;
+    }
+
+    .home a:hover {
+        text-decoration: underline;
+    }
+    .home span{
+        color: red;
+    }
+  </style>
+
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" onclick="showHome()" href="#home">Wine App</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" href="#predict" onclick="showPredictContainer()">Predict</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#visualize" onclick="showVisualizations()">Visualizations</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <div class="home">
+    <h1>Welcome to the Wine Quality Prediction Website</h1>
+  </br>
+    <p>Explore the world of wines and discover the intricacies of wine quality. Our platform provides insights into various aspects of wine, helping you understand and appreciate the nuances of different varieties.</p>
+
+    <p>Whether you're a wine enthusiast or a novice, our platform offers tools for predicting wine quality and visualizing data related to different wine characteristics. Join us on a journey of taste and quality.</p>
+
+    <p>Get started by <span>predicting wine quality</span> or <span>explore visualizations</span> to delve deeper into the world of wines.</p>
+
+    <p>For any inquiries or assistance,contact us.</p>
+
+  </div>
+  <div class="container-fluid predict-container hidden">
+    <h1>Wine Quality Predictor</h1>
+    <form action="/predict" method="post">
+        <div class="container-fluid">
+            <div class="row">
+            <div class="slidecontainer winetype col-md-4">
+              <label for="wine_type">Wine Type:</label>
+              <select name="wine_type" required>
+                <option value="red">Red</option>
+                <option value="white">White</option></select
+              ><br />
+            </div>
+              <div class="slidecontainer col-md-4">
+                <p>Fixed Acidity: <span id="fixed_acidity_value">5.4</span></p>
+                <input
+                  type="range"
+                  min="{{min_values['fixed acidity']}}"
+                  max="{{max_values['fixed acidity']}}"
+                  step="0.1"
+                  value="5.4"
+                  class="slider"
+                  id="fixed_acidity"
+                  name="fixed_acidity"
+                  oninput="updateSliderValue('fixed_acidity', 'fixed_acidity_value')"
+                />
+              </div>
+      
+              <div class="slidecontainer col-md-4">
+                <p>Volatile Acidity: <span id="volatile_acidity_value">0.5</span></p>
+                <input
+                  type="range"
+                  min="{{min_values['volatile acidity']}}"
+                  max="{{max_values['volatile acidity']}}"
+                  step="0.1"
+                  value="0.5"
+                  class="slider"
+                  id="volatile_acidity"
+                  name="volatile_acidity"
+                  oninput="updateSliderValue('volatile_acidity', 'volatile_acidity_value')"
+                />
+              </div>
+            </div>
+            <div class="row">
+              <div class="slidecontainer col-md-4">
+                <p>Citric Acid: <span id="citric_acid_value">0.3</span></p>
+                <input
+                  type="range"
+                  min="{{min_values['citric acid']}}"
+                  max="{{max_values['citric acid']}}"
+                  step="0.1"
+                  value="0.3"
+                  class="slider"
+                  id="citric_acid"
+                  name="citric_acid"
+                  oninput="updateSliderValue('citric_acid', 'citric_acid_value')"
+                />
+              </div>
+      
+              <div class="slidecontainer col-md-4">
+                <p>Residual Sugar: <span id="residual_sugar_value">10</span></p>
+                <input
+                  type="range"
+                  min="{{min_values['residual sugar']}}"
+                  max="{{max_values['residual sugar']}}"
+                  value="10"
+                  class="slider"
+                  id="residual_sugar"
+                  name="residual_sugar"
+                  oninput="updateSliderValue('residual_sugar', 'residual_sugar_value')"
+                />
+              </div>
+      
+              <div class="slidecontainer col-md-4">
+                <p>Chlorides: <span id="chlorides_value">0.08</span></p>
+                <input
+                  type="range"
+                  min="{{min_values['chlorides']}}"
+                  max="{{max_values['chlorides']}}"
+                  step="0.01"
+                  value="0.08"
+                  class="slider"
+                  id="chlorides"
+                  name="chlorides"
+                  oninput="updateSliderValue('chlorides', 'chlorides_value')"
+                />
+              </div>
+            </div>
+            <div class="row">
+              <div class="slidecontainer col-md-4">
+                <p>
+                  Free Sulfur Dioxide: <span id="free_sulfur_dioxide_value">30</span>
+                </p>
+                <input
+                  type="range"
+                  min="{{min_values['free sulfur dioxide']}}"
+                  max="{{max_values['free sulfur dioxide']}}"
+                  value="30"
+                  class="slider"
+                  id="free_sulfur_dioxide"
+                  name="free_sulfur_dioxide"
+                  oninput="updateSliderValue('free_sulfur_dioxide', 'free_sulfur_dioxide_value')"
+                />
+              </div>
+      
+              <div class="slidecontainer col-md-4">
+                <p>pH: <span id="pH_value">2.9</span></p>
+                <input
+                  type="range"
+                  min="{{min_values['pH']}}"
+                  max="{{max_values['pH']}}"
+                  step="0.1"
+                  value="2.9"
+                  class="slider"
+                  id="pH"
+                  name="pH"
+                  oninput="updateSliderValue('pH', 'pH_value')"
+                />
+              </div>
+      
+              <div class="slidecontainer col-md-4">
+                <p>
+                  Total Sulfur dioxide:
+                  <span id="total_sulfur_dioxide_value">70</span>
+                </p>
+                <input
+                  type="range"
+                  min="{{min_values['total sulfur dioxide']}}"
+                  max="{{max_values['total sulfur dioxide']}}"
+                  step="0.1"
+                  value="70"
+                  class="slider"
+                  id="total_sulfur_dioxide"
+                  name="total_sulfur_dioxide"
+                  oninput="updateSliderValue('total_sulfur_dioxide', 'total_sulfur_dioxide_value')"
+                />
+              </div>
+            </div>
+            <div class="row">
+              <div class="slidecontainer col-md-4">
+                <p>Density: <span id="density_value">0.995</span></p>
+                <input
+                  type="range"
+                  min="{{min_values['density']}}"
+                  max="{{max_values['density']}}"
+                  step="0.01"
+                  value="0.995"
+                  class="slider"
+                  id="density"
+                  name="density"
+                  oninput="updateSliderValue('density', 'density_value')"
+                />
+              </div>
+      
+              <div class="slidecontainer col-md-4">
+                <p>Sulphates: <span id="sulphates_value">0.6</span></p>
+                <input
+                  type="range"
+                  min="{{min_values['sulphates']}}"
+                  max="{{max_values['sulphates']}}"
+                  step="0.1"
+                  value="0.6"
+                  class="slider"
+                  id="sulphates"
+                  name="sulphates"
+                  oninput="updateSliderValue('sulphates', 'sulphates_value')"
+                />
+              </div>
+      
+              <div class="slidecontainer col-md-4">
+                <p>Alcohol: <span id="alcohol_value">11</span></p>
+                <input
+                  type="range"
+                  min="{{min_values['alcohol']}}"
+                  max="{{max_values['alcohol']}}"
+                  step="0.1"
+                  value="11"
+                  class="slider"
+                  id="alcohol"
+                  name="alcohol"
+                  oninput="updateSliderValue('alcohol', 'alcohol_value')"
+                />
+              </div>
+            </div>
+           
+            <button class="btn btn-primary btn-lg predictbtn" type="submit">Predict</button>
+            </div>
+    </form>
+  </div>
+
+  <div class="container-fluid visualizations-container hidden">
+    <h3>Try different dropdown values to see trend between Wine quality and other features.</h1>
+    <div class="dropdown">
+      <button class="btn btn-primary dropdown-toggle" type="button" id="visualizationDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Quality vs All Other Features
+      </button>
+      <div class="dropdown-menu" aria-labelledby="visualizationDropdown">
+        <a class="dropdown-item" href="#" data-image-src="static\images\quality_vs_fixed_acidity.jpg" onclick="changeImage(this)">Quality vs Fixed Acidity</a>
+        <a class="dropdown-item" href="#" data-image-src="static\images\quality_vs_volatile_acidity.jpg" onclick="changeImage(this)">Quality vs Volatile Acidity</a>
+        <a class="dropdown-item" href="#" data-image-src="static\images\quality_vs_citric_acid.jpg" onclick="changeImage(this)">Quality vs Citric Acid</a>
+        <a class="dropdown-item" href="#" data-image-src="static\images\quality_vs_residual_sugar.jpg" onclick="changeImage(this)">Quality vs Residual Sugar</a>
+        <a class="dropdown-item" href="#" data-image-src="static\images\quality_vs_chlorides.jpg" onclick="changeImage(this)">Quality vs Chlorides</a>
+        <a class="dropdown-item" href="#" data-image-src="static\images\quality_vs_free_sulfur_dioxide.jpg" onclick="changeImage(this)">Quality vs Free Sulfur Dioxide</a>
+        <!-- <a class="dropdown-item" href="#" data-image-src="static\images\quality_vs_ph.jpg" onclick="changeImage(this)">Quality vs pH</a>
+        <a class="dropdown-item" href="#" data-image-src="static\images\quality_vs_total_sulfur_dioxide.jpg" onclick="changeImage(this)">Quality vs Total Sulfur Dioxide</a>-->
+        <a class="dropdown-item" href="#" data-image-src="static\images\quality_vs_density.jpg" onclick="changeImage(this)">Quality vs Density</a>
+        <a class="dropdown-item" href="#" data-image-src="static\images\quality_vs_sulphates.jpg" onclick="changeImage(this)">Quality vs Sulphates</a>
+        <a class="dropdown-item" href="#" data-image-src="static\images\quality_vs_alcohol.jpg" onclick="changeImage(this)">Quality vs Alcohol</a>
+      </div>
+      
+    </div>
+    <img id="correspondingImage" class="hidden plot-img" src="" alt="Corresponding Image">
+  </div>
+  
+
+  <script>
+    function showPredictContainer() {
+      document.querySelector('.predict-container').classList.remove('hidden');
+      document.querySelector('.visualizations-container').classList.add('hidden');
+      document.querySelector('.home').classList.add('hidden');
+    }
+
+    function showVisualizations() {
+      document.querySelector('.predict-container').classList.add('hidden');
+      document.querySelector('.home').classList.add('hidden');
+      document.querySelector('.visualizations-container').classList.remove('hidden');
+    }
+    function showHome(){
+        document.querySelector('.predict-container').classList.add('hidden');
+      document.querySelector('.home').classList.remove('hidden');
+      document.querySelector('.visualizations-container').classList.add('hidden');
+    }
+    function changeImage(element) {
+        var imageSrc = $(element).data('image-src');
+        document.getElementById("correspondingImage").classList.remove("hidden");
+        document.getElementById("visualizationDropdown").innerHTML= element.innerHTML;
+        $('#correspondingImage').attr('src', imageSrc);
+      }
+  </script>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"  crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" crossorigin="anonymous"></script>
+  
+  </body>
+</html>

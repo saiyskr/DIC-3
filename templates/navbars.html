@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <!-- Meta tags for responsive design -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-  
+  <!-- Internal CSS for custom styling -->
   <style>
     body {
       text-align: center;
@@ -123,6 +125,7 @@
 
 </head>
 <body>
+  <!-- Navigation bar using Bootstrap -->
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <a class="navbar-brand" onclick="showHome()" href="#home">Wine App</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -139,6 +142,7 @@
       </ul>
     </div>
   </nav>
+  <!--Landing page or Home of the Wine prediction website-->
   <div class="home">
     <h1>Welcome to the Wine Quality Prediction Website</h1>
   </br>
@@ -149,7 +153,7 @@
     <p>Get started by <span>predicting wine quality</span> or <span>explore visualizations</span> to delve deeper into the world of wines.</p>
 
     <p>For any inquiries or assistance,contact us.</p>
-
+     <!-- Footer section with developer information -->
     <footer>
       Developed by
       <a href="https://www.linkedin.com/in/kyatham-vamshi-krishna-990b13175/" target="_blank">Vamshi Krishna Kyatham</a>,
@@ -158,10 +162,13 @@
       University at Buffalo
   </footer>
   </div>
+  <!-- Predict section of webiste with sliders for input -->
   <div class="container-fluid predict-container hidden">
     <h1>Wine Quality Predictor</h1>
+     <!-- Form for input sliders -->
     <form action="/predict" method="post">
         <div class="container-fluid">
+          <!-- Sliders for different features -->
             <div class="row">
             <div class="slidecontainer winetype col-md-4">
               <label for="wine_type">Wine Type:</label>
@@ -341,18 +348,19 @@
                 />
               </div>
             </div>
-           
+           <!-- Predict button -->
             <button class="btn btn-primary btn-lg predictbtn" type="submit">Predict</button>
             </div>
     </form>
   </div>
-
+  <!-- Visualizations section of website with dropdown for selecting different options -->
   <div class="container-fluid visualizations-container hidden">
     <h3>Try different dropdown values to see trend between Wine quality and other features.</h1>
     <div class="dropdown">
       <button class="btn btn-primary dropdown-toggle" type="button" id="visualizationDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         Quality vs All Other Features
       </button>
+      <!-- Dropdown items for various visualizations -->
       <div class="dropdown-menu" aria-labelledby="visualizationDropdown">
         <a class="dropdown-item" href="#" data-image-src="static\images\quality_vs_fixed_acidity.jpg" onclick="changeImage(this)">Quality vs Fixed Acidity</a>
         <a class="dropdown-item" href="#" data-image-src="static\images\quality_vs_volatile_acidity.jpg" onclick="changeImage(this)">Quality vs Volatile Acidity</a>
@@ -360,19 +368,19 @@
         <a class="dropdown-item" href="#" data-image-src="static\images\quality_vs_residual_sugar.jpg" onclick="changeImage(this)">Quality vs Residual Sugar</a>
         <a class="dropdown-item" href="#" data-image-src="static\images\quality_vs_chlorides.jpg" onclick="changeImage(this)">Quality vs Chlorides</a>
         <a class="dropdown-item" href="#" data-image-src="static\images\quality_vs_free_sulfur_dioxide.jpg" onclick="changeImage(this)">Quality vs Free Sulfur Dioxide</a>
-        <!-- <a class="dropdown-item" href="#" data-image-src="static\images\quality_vs_ph.jpg" onclick="changeImage(this)">Quality vs pH</a>
-        <a class="dropdown-item" href="#" data-image-src="static\images\quality_vs_total_sulfur_dioxide.jpg" onclick="changeImage(this)">Quality vs Total Sulfur Dioxide</a>-->
         <a class="dropdown-item" href="#" data-image-src="static\images\quality_vs_density.jpg" onclick="changeImage(this)">Quality vs Density</a>
         <a class="dropdown-item" href="#" data-image-src="static\images\quality_vs_sulphates.jpg" onclick="changeImage(this)">Quality vs Sulphates</a>
         <a class="dropdown-item" href="#" data-image-src="static\images\quality_vs_alcohol.jpg" onclick="changeImage(this)">Quality vs Alcohol</a>
       </div>
       
     </div>
+    <!-- Image to display corresponding visualization -->
     <img id="correspondingImage" class="hidden plot-img" src="" alt="Corresponding Image">
   </div>
   
 
   <script>
+    // JavaScript functions for showing/hiding containers and updating UI
     function showPredictContainer() {
       document.querySelector('.predict-container').classList.remove('hidden');
       document.querySelector('.visualizations-container').classList.add('hidden');
@@ -400,6 +408,7 @@
         $('#correspondingImage').attr('src', imageSrc);
       }
   </script>
+  <!-- JavaScript scripts for importing JavaScript and jquery functionalities and Bootstrap dependencies -->
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"  crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" crossorigin="anonymous"></script>

@@ -1,56 +1,67 @@
-<!-- templates/result.html -->
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
+    <!-- Meta tags for character set and viewport settings -->
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Result</title>
+    <!-- Internal stylesheet for styling -->
     <style>
-      body {
-        font-family: "Arial", sans-serif;
-        margin: 20px;
-        text-align: center;
-      }
+        /* General styling for the entire body */
+        body {
+            font-family: "Arial", sans-serif;
+            margin: 20px;
+            text-align: center;
+        }
 
-      h1 {
-        text-align: center;
-        color: purple;
-      }
+        /* Styling for the main heading */
+        h1 {
+            text-align: center;
+            color: purple;
+        }
 
-      .vintage-label {
-        text-align: center;
-        font-size: 36px;
-        font-weight: bold;
-        padding: 10px;
-        margin-top: 20px;
-        border: 5px solid;
-        border-image: linear-gradient(45deg, #ff7e5f, #feb47b);
-        border-image-slice: 1;
-        display: inline-block;
-      }
+        /* Styling for the result label */
+        .vintage-label {
+            text-align: center;
+            font-size: 36px;
+            font-weight: bold;
+            padding: 10px;
+            margin-top: 20px;
+            /* Styling for the border with a gradient effect */
+            border: 5px solid;
+            border-image: linear-gradient(45deg, #ff7e5f, #feb47b);
+            border-image-slice: 1;
+            display: inline-block;
+        }
 
-      .Good {
-        color: green;
-    }
+        /* Styling for the 'Good' prediction category */
+        .Good {
+            color: green;
+        }
 
-    .Bad {
-        color: red;
-    }
+        /* Styling for the 'Bad' prediction category */
+        .Bad {
+            color: red;
+        }
 
-    img {
-        width: 200px; /* Adjust the width as needed */
-        height: auto; /* Maintain aspect ratio */
-    }
+        /* Styling for the result image */
+        img {
+            width: 200px; /* Adjust the width as needed */
+            height: auto; /* Maintain aspect ratio */
+        }
     </style>
-  </head>
-  <body>
+</head>
+<body>
+    <!-- Main heading for the page -->
     <h1>Result</h1>
-    <!--<p>Prediction: {{ prediction }}</p>-->
-
+    
+    <!-- Container for the vintage label and result image -->
     <div class="vintage-label {{ prediction_category }}">
-      <p>{{ prediction_category }} Wine Quality</p>
-      <img src="{% if prediction_category == 'Good' %}static/images/thumbsup.jpg{% else %}static/images/thumbsdown.jpg{% endif %}" alt="Result Image">
+        <!-- Displaying the prediction category and styling based on the result -->
+        <p>{{ prediction_category }} Wine Quality</p>
+        <!-- Displaying an image based on the prediction category -->
+        <img src="{% if prediction_category == 'Good' %}static/images/thumbsup.jpg{% else %}static/images/thumbsdown.jpg{% endif %}" alt="Result Image">
     </div>
     
-  </body>
+</body>
 </html>

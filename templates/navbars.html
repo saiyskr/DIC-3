@@ -10,7 +10,7 @@
     }
 
     h1 {
-      ffont-family: Arial, sans-serif;
+      font-family: Arial, sans-serif;
       margin-top: 20px;
     }
     h3 {
@@ -99,6 +99,26 @@
     .home span{
         color: red;
     }
+    footer {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 12px;
+            color: #888;
+    }
+    .developer {
+            font-weight: bold;
+    }
+
+    .developer a {
+            text-decoration: none;
+            color: #0077b5;
+    }
+
+    .developer a:hover {
+            text-decoration: underline;
+    }
   </style>
 
 </head>
@@ -130,6 +150,13 @@
 
     <p>For any inquiries or assistance,contact us.</p>
 
+    <footer>
+      Developed by
+      <a href="https://www.linkedin.com/in/kyatham-vamshi-krishna-990b13175/" target="_blank">Vamshi Krishna Kyatham</a>,
+      <a href="https://www.linkedin.com/in/sai-kiran-reddy-yeruva-183721130/" target="_blank">Sai Kiran Reddy Yeruva</a> and
+      <a href="https://www.linkedin.com/in/deekshith-k-9b6349194/" target="_blank">Deekshith Katker</a> -
+      University at Buffalo
+  </footer>
   </div>
   <div class="container-fluid predict-container hidden">
     <h1>Wine Quality Predictor</h1>
@@ -164,7 +191,7 @@
                   type="range"
                   min="{{min_values['volatile acidity']}}"
                   max="{{max_values['volatile acidity']}}"
-                  step="0.1"
+                  step="0.01"
                   value="0.5"
                   class="slider"
                   id="volatile_acidity"
@@ -275,7 +302,7 @@
                   type="range"
                   min="{{min_values['density']}}"
                   max="{{max_values['density']}}"
-                  step="0.01"
+                  step="0.001"
                   value="0.995"
                   class="slider"
                   id="density"
